@@ -9,13 +9,17 @@
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "@react-router/node": "7.15.1",
     "@react-router/serve": "7.15.1",
+    "@sentry/profiling-node": "^10.56.0",
+    "@sentry/react": "^10.56.0",
+    "@sentry/react-router": "^10.56.0",
     "@syncfusion/ej2-base": "^33.2.3",
     "@syncfusion/ej2-react-buttons": "^33.2.5",
     "@syncfusion/ej2-react-charts": "^33.2.8",
     "@syncfusion/ej2-react-dropdowns": "^33.2.8",
-    "@syncfusion/ej2-react-grids": "^33.2.8",
+    "@syncfusion/ej2-react-grids": "^33.2.10",
     "@syncfusion/ej2-react-maps": "^33.2.3",
     "@syncfusion/ej2-react-navigations": "^33.2.8",
     "@syncfusion/ej2-react-splitbuttons": "^33.2.6",
@@ -23,6 +27,7 @@
     "chart.js": "^4.5.1",
     "clsx": "^2.1.1",
     "dayjs": "^1.11.21",
+    "groq-sdk": "^1.2.1",
     "isbot": "^5.1.36",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
@@ -37,6 +42,7 @@
     "@types/react-dom": "^19.2.3",
     "tailwindcss": "^4.2.2",
     "typescript": "^5.9.3",
-    "vite": "^8.0.3"
+    "vite": "^8.0.3",
+    "vite-tsconfig-paths": "^6.1.1"
   }
 }

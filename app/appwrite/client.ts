@@ -9,10 +9,12 @@ export const appwriteConfig = {
     tripCollectionId: import.meta.env.VITE_APPWRITE_TRIPS_COLLECTION_ID,
 }
 
-const client = new Client().setEndpoint(appwriteConfig.endpointUrl).setProject(appwriteConfig.projectId)
+const client = new Client()
+    .setEndpoint(appwriteConfig.endpointUrl)
+    .setProject(appwriteConfig.projectId)
 
 const account = new Account(client);
 const database = new Databases(client);
 const storage = new Storage(client);
 
-export {account, client, database, storage};
+export { client, account, database, storage };
