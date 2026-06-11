@@ -25,6 +25,17 @@ export async function clientLoader() {
 }
 
 const SignIn = () => {
+        useEffect(() => {
+        const shown = localStorage.getItem("cookies-warning");
+
+        if (!shown) {
+            alert(
+                "If Google Sign-In doesn't work, please make sure Third-Party Cookies are enabled in your browser."
+            );
+
+            localStorage.setItem("cookies-warning", "true");
+        }
+    }, []);
     return (
         <main className="auth">
             <section className="size-full glassmorphism flex-center px-6">
