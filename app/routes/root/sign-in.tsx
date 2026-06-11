@@ -3,7 +3,7 @@ import {ButtonComponent} from "@syncfusion/ej2-react-buttons";
 import {loginWithGoogle} from "../../appwrite/auth";
 import {account} from "../../appwrite/client";
 import { getExistingUser, storeUserData } from "../../appwrite/auth";
-
+import { useEffect } from "react";
 export async function clientLoader() {
     try {
         const user = await account.get();
