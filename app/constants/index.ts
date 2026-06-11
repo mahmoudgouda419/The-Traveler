@@ -19,8 +19,13 @@ export const sidebarItems = [
     label: "AI Trips",
     href: "/trips",
   },
+  {
+    id: 5,
+    icon: "/assets/icons/home.svg",
+    label: "User Home",
+    href: "/",
+  },
 ];
-
 export const chartOneData: object[] = [
   {
     x: "Jan",

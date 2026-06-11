@@ -9,7 +9,6 @@ import { ButtonComponent } from "@syncfusion/ej2-react-buttons";
 import {comboBoxItems, selectItems} from "~/constants";
 import {account} from "~/appwrite/client";
 import {useNavigate} from "react-router";
-import.meta.env.VITE_REST_COUNTRIES_KEY;
 
 interface Country {
     [key: string]: any;
@@ -28,7 +27,6 @@ interface TripFormData {
     duration: number;
     groupType: string;
 }
-
 export const clientLoader = async () => {
     try {
         const response = await fetch(
@@ -118,7 +116,7 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
             })
             const result: CreateTripResponse = await response.json();
 
-            if (result?.id) navigate(`/trips/${result.id}`);
+            if (result?.id) navigate(`/travel/${result.id}`);
             else console.error("Could not create trip");
         } catch (e) {
             console.error("Error in creating trip", e);
@@ -149,7 +147,7 @@ const CreateTrip = ({ loaderData }: Route.ComponentProps) => {
         : [];
 
     return (
-        <main className="flex flex-col gap-10 pb-20 wrapper">
+        <main className="flex flex-col gap-10 pb-20 pt-30 wrapper">
             <Header title="Add a New Trip" description="View and edit AI Generated travel plans" />
 
             <section className="mt-2.5 wrapper-md">
