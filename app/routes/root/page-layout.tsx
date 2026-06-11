@@ -4,13 +4,26 @@ import { useLoaderData } from "react-router";
 import { getUser } from "~/appwrite/auth";
 import { Link } from "react-router";
 import { Outlet } from "react-router";
-
+import { redirect } from "react-router";
 import UserSidebar from "../../../components/UserSidebar";
 
 export const clientLoader = async () => {
-    return await getUser();
-};
+    console.log("PAGE LAYOUT LOADER");
+    const user = await getUser();
+    console.log("USER =", user);
 
+    if (!user) {
+        throw redirect("/sign-in");
+    }
+
+    return user;
+
+
+
+
+
+
+};
 const PageLayout = () => {
     const user = useLoaderData();
     const navigate = useNavigate();

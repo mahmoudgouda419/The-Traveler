@@ -38,11 +38,12 @@ export const storeUserData = async () => {
                 joinedAt: new Date().toISOString(),
             }
         );
-
+        return createdUser;
         if (!createdUser.$id) redirect("/sign-in");
     } catch (error) {
         console.error("Error storing user data:", error);
     }
+
 };
 
 const getGooglePicture = async (accessToken: string) => {
@@ -81,10 +82,13 @@ export const logoutUser = async () => {
     }
 };
 
+
+
 export const getUser = async () => {
     try {
         const user = await account.get();
-        if (!user) return redirect("/sign-in");
+
+        console.log("ACCOUNT =", user);
 
         const { documents } = await database.listDocuments(
             appwriteConfig.databaseId,
@@ -97,14 +101,16 @@ export const getUser = async () => {
                     "imageUrl",
                     "joinedAt",
                     "accountId",
-                    "status"
+                    "status",
                 ]),
             ]
         );
 
-        return documents.length > 0 ? documents[0] : redirect("/sign-in");
+        console.log("DOCUMENTS =", documents);
+
+        return documents.length > 0 ? documents[0] : null;
     } catch (error) {
-        console.error("Error fetching user:", error);
+        console.error("GET USER ERROR =", error);
         return null;
     }
 };
