@@ -1,15 +1,16 @@
 // @ts-nocheck
 
+
 import { SidebarComponent } from "@syncfusion/ej2-react-navigations";
 import UserNavItems from "./UserNavItems";
-
+import { useLoaderData } from "react-router";
 import { useRef, useState } from "react";
 
 const UserSidebar = () => {
 
-
+    const user = useLoaderData() as any;
+    const [code, setCode] = useState("");
     const sidebarRef = useRef<SidebarComponent | null>(null);
-
     const [isOpen, setIsOpen] = useState(false);
     const [showBecomeAdmin, setShowBecomeAdmin] = useState(false);
 
@@ -23,6 +24,24 @@ const UserSidebar = () => {
         setIsOpen(prev => !prev);
     };
     // @ts-ignore
+
+    const handleVerify = async () => {
+        const res = await fetch("/api/become-admin", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                code,
+                accountId: user.accountId,
+            }),
+        })
+        const result = await res.json();
+        if (!result.success) {
+            alert(result.message ?? "Invalid Code");
+            return;
+        }
+        window.location.reload();
+    }
+
     return (
         <>
             <button
@@ -70,6 +89,8 @@ const UserSidebar = () => {
                         <input
                             type="password"
                             placeholder="Admin Code"
+                            value={code}
+                            onChange={(e) => setCode(e.target.value)}
                             className="form-input mt-5 w-full"
                         />
                         <div className="flex justify-end gap-3 mt-6">
@@ -79,7 +100,7 @@ const UserSidebar = () => {
                             >
                                 Cancel
                             </button>
-                            <button className="button-class !text-white p-1 hover:!bg-blue-700">
+                            <button className="button-class !text-white p-1 hover:!bg-blue-700" onClick={handleVerify}>
                                 Verify
                             </button>
                         </div>

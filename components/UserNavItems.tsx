@@ -68,7 +68,7 @@ const NavItems = ({handleClick, onBecomeAdmin}: {
                 )}
                     {!isAdmin && (
                         <button onClick={onBecomeAdmin} className="group nav-item w-full text-left cursor-pointer">
-                            <img src = "/assets/icons/lock.svg" alt = "become admin" className = "group-hover:brightness-0 size-5 group-hover:invert" />
+                            <img src = "/assets/icons/lock.png" alt = "become admin" className = "group-hover:brightness-0 size-5 group-hover:invert" />
                         Become Admin
                         </button>
                     )}
