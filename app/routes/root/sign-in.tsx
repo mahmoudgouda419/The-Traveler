@@ -3,7 +3,7 @@ import {ButtonComponent} from "@syncfusion/ej2-react-buttons";
 import {loginWithGoogle} from "../../appwrite/auth";
 import {account} from "../../appwrite/client";
 import { getExistingUser, storeUserData } from "../../appwrite/auth";
-import { useEffect } from "react";
+
 export async function clientLoader() {
     try {
         const user = await account.get();
@@ -25,11 +25,6 @@ export async function clientLoader() {
 }
 
 const SignIn = () => {
-    useEffect(() => {
-        alert(
-            "If Google Sign-In doesn't work, please make sure Third-Party Cookies are enabled in your browser."
-        );
-    }, []);
     return (
         <main className="auth">
             <section className="size-full glassmorphism flex-center px-6">

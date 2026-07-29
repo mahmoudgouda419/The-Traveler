@@ -80,18 +80,18 @@ const PageLayout = () => {
                                 className="w-14 h-14 rounded-full object-cover"
                             />
 
-                        <button
-                            onClick={handleLogout}
-                            className="w-14 h-14 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center hover:bg-white/40 transition cursor-pointer"
-                        >
-                            <img
-                                src="/assets/icons/logout.svg"
-                                alt="logout"
-                                className="size-6"
-                            />
-                        </button>
+                            <button
+                                onClick={handleLogout}
+                                className="w-14 h-14 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center hover:bg-white/40 transition cursor-pointer"
+                            >
+                                <img
+                                    src="/assets/icons/logout.svg"
+                                    alt="logout"
+                                    className="size-6"
+                                />
+                            </button>
                         </div>
-            <UserSidebar />
+                        <UserSidebar />
 
                     </div>
 

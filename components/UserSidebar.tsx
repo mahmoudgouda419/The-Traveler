@@ -4,11 +4,14 @@ import { SidebarComponent } from "@syncfusion/ej2-react-navigations";
 import UserNavItems from "./UserNavItems";
 
 import { useRef, useState } from "react";
+
 const UserSidebar = () => {
 
 
     const sidebarRef = useRef<SidebarComponent | null>(null);
+
     const [isOpen, setIsOpen] = useState(false);
+    const [showBecomeAdmin, setShowBecomeAdmin] = useState(false);
 
     const toggleSidebar = () => {
         if (isOpen) {
@@ -44,8 +47,45 @@ const UserSidebar = () => {
                 showBackdrop={true}
                 type="over"
             >
-                <UserNavItems handleClick={toggleSidebar} />
+                <UserNavItems handleClick={toggleSidebar}
+                              onBecomeAdmin={() => {
+                                  sidebarRef.current?.hide();
+                                  setIsOpen(false);
+                                  setShowBecomeAdmin(true);
+                              }}
+                />
             </SidebarComponent>
+            {showBecomeAdmin && (
+                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999]" onClick={() => setShowBecomeAdmin(false)}>
+                    <div
+                        className="bg-white rounded-2xl p-8 w-[420px]"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <h2 className="text-2xl font-bold">
+                            Become Admin
+                        </h2>
+                        <p className="text-gray-500 mt-2">
+                            Enter the admin code.
+                        </p>
+                        <input
+                            type="password"
+                            placeholder="Admin Code"
+                            className="form-input mt-5 w-full"
+                        />
+                        <div className="flex justify-end gap-3 mt-6">
+                            <button
+                                className="button-class-secondary"
+                                onClick={() => setShowBecomeAdmin(false)}
+                            >
+                                Cancel
+                            </button>
+                            <button className="button-class !text-white p-1 hover:!bg-blue-700">
+                                Verify
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </>
     );
 };

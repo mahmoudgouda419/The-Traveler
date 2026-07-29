@@ -1,9 +1,14 @@
+
 import {Link, NavLink, useLoaderData, useNavigate} from "react-router";
 import {cn} from "../lib/utils";
 import {logoutUser} from "../app/appwrite/auth";
-const NavItems = ({handleClick}: {handleClick?: () => void }) => {
+const NavItems = ({handleClick, onBecomeAdmin}: {
+    handleClick?: () => void;
+    onBecomeAdmin: () => void;
+}) => {
     const user = useLoaderData()
     const isAdmin = user?.status === "admin";
+
 
     const navigate = useNavigate();
     const handleLogout = async () => {
@@ -61,7 +66,12 @@ const NavItems = ({handleClick}: {handleClick?: () => void }) => {
                         )}
                     </NavLink>
                 )}
-
+                    {!isAdmin && (
+                        <button onClick={onBecomeAdmin} className="group nav-item w-full text-left cursor-pointer">
+                            <img src = "/assets/icons/lock.svg" alt = "become admin" className = "group-hover:brightness-0 size-5 group-hover:invert" />
+                        Become Admin
+                        </button>
+                    )}
                 </nav>
                 <footer className="nav-footer">
                     <img src={user?.imageUrl || '/assets/images/david.webp'}  alt={user?.name || 'Mahmoud'} />
@@ -82,6 +92,8 @@ const NavItems = ({handleClick}: {handleClick?: () => void }) => {
                     </button>
                 </footer>
             </div>
+
+
         </section>
     )
 }
