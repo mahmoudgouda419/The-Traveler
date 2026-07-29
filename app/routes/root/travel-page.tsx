@@ -9,7 +9,8 @@ import { PagerComponent } from "@syncfusion/ej2-react-grids";
 import { getAllTrips } from "~/appwrite/trips";
 import { parseTripData } from "../../../lib/utils";
 import { TripCard } from "../../../components";
-
+import Typed from "typed.js";
+import {useEffect, useRef} from "react";
 import { type LoaderFunctionArgs } from "react-router";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -58,6 +59,31 @@ const TravelPage = ({ loaderData }: any) => {
                 });
         }, 50);
     };
+    const typedRef = useRef<HTMLSpanElement>(null);
+
+
+    useEffect(() => {
+        if (!typedRef.current) return;
+        const typed = new Typed(typedRef.current!, {
+            strings: [
+                "Adventure With AI",
+                "Business Week",
+                "Family Vacation",
+                "Luxury Trip",
+                "Budget Journey",
+            ],
+            typeSpeed: 60,
+            backSpeed: 40,
+            backDelay: 1800,
+            loop: true,
+            smartBackspace: true,
+            showCursor: true,
+            cursorChar: "|",
+        });
+
+        return () => typed.destroy();
+    }, []);
+
     return (
         <>
         <section className="relative h-screen overflow-hidden">
@@ -79,14 +105,19 @@ const TravelPage = ({ loaderData }: any) => {
             <div className="relative z-10 h-full flex items-center">
                 <div className="max-w-[1400px] mx-auto w-full px-12">
                     <div className="max-w-3xl">
-                        <h1 className="
-                            text-5xl
-                            md:text-6xl
-                            lg:text-7xl
-                            font-bold
-                            leading-tight
-">
-                            Plan Your Next Adventure With AI
+                        <h1
+                            className="
+        text-5xl
+        md:text-6xl
+        lg:text-7xl
+        font-bold
+        leading-tight
+    "
+                        >
+                            Plan Your Next
+                            <br />
+
+                            <span ref={typedRef}></span>
                         </h1>
 
                         <p className="text-xl text-dark-100/90 mt-6">
