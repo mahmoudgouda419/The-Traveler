@@ -33,3 +33,25 @@ export const getTripById = async (tripId: string) => {
 
     return trip;
 }
+
+export const getTripsByUser = async (
+    userId: string,
+    limit = 4
+) => {
+    try {
+        const { documents } = await database.listDocuments(
+            appwriteConfig.databaseId,
+            appwriteConfig.tripCollectionId,
+            [
+                Query.equal("userId", userId),
+                Query.orderDesc("createdAt"),
+                Query.limit(limit),
+            ]
+        );
+
+        return documents;
+    } catch (e) {
+        console.error("Error getting documents for user", e);
+        return [];
+    }
+};

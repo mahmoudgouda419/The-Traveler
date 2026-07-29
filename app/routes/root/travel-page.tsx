@@ -6,27 +6,37 @@ import { Link } from "react-router";
 import {Outlet} from "react-router";
 import { useSearchParams } from "react-router";
 import { PagerComponent } from "@syncfusion/ej2-react-grids";
-import { getAllTrips } from "~/appwrite/trips";
+import { getAllTrips, getTripsByUser } from "~/appwrite/trips";
 import { parseTripData } from "../../../lib/utils";
 import { TripCard } from "../../../components";
 import Typed from "typed.js";
 import {useEffect, useRef} from "react";
 import { type LoaderFunctionArgs } from "react-router";
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
+export const clientLoader = async () => {
     const limit = 8;
+    const offset = 0;
+    const user = await getUser();
 
-    const url = new URL(request.url);
-    const page = parseInt(url.searchParams.get("page") || "1", 10);
+    const [userTrips, { allTrips, total }] = await Promise.all([
+        user ? getTripsByUser(user.accountId) : Promise.resolve([]),
+        getAllTrips(limit, offset),
+    ]);
+    console.log("USER TRIPS =", userTrips);
+    const  myTrips = userTrips.map((trip) => {
+        const parsedData = parseTripData(trip.tripDetail) || {};
 
-    const offset = (page - 1) * limit;
-
-    const { allTrips, total } = await getAllTrips(limit, offset);
+        return {
+            id: trip.$id,
+            ...parsedData,
+            imageUrls: trip.imageUrls ?? [],
+        };
+    })
 
     return {
+        myTrips,
         trips: allTrips.map((trip) => {
             const parsedData = parseTripData(trip.tripDetail) || {};
-
             return {
                 id: trip.$id,
                 ...parsedData,
@@ -36,8 +46,12 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
         total,
     };
 };
+
+clientLoader.hydrate = true;
+
 const TravelPage = ({ loaderData }: any) => {
     const trips = loaderData.trips || [];
+    const myTrips = loaderData.myTrips || [];
     const [searchParams, setSearchParams] = useSearchParams();
 
     const currentPage = Number(
@@ -137,6 +151,52 @@ const TravelPage = ({ loaderData }: any) => {
             </div>
 
         </section>
+            <section className="bg-white pt-20">
+                <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+
+                    <div className="flex items-center justify-between mb-8">
+                        <div>
+                            <h2 className="text-4xl font-bold">
+                                Continue Your Journey
+                            </h2>
+
+                            <p className="text-gray-500 mt-2">
+                                Your recently created AI trips.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    {myTrips.length === 0 ? (
+                        <div className="text-center py-16 border rounded-2xl">
+                            <h3 className="text-2xl font-semibold">
+                                You haven't created any trips yet.
+                            </h3>
+
+                            <p className="text-gray-500 mt-3">
+                                Generate your first AI itinerary.
+                            </p>
+                        </div>
+                    ) : (
+                        <div className="trip-grid">
+                            {myTrips.map((trip: any) => (
+                                <TripCard
+                                    key={trip.id}
+                                    id={trip.id}
+                                    name={trip.name}
+                                    imageUrl={trip.imageUrls?.[0]}
+                                    location={trip.itinerary?.[0]?.location ?? ""}
+                                    tags={[
+                                        trip.interests,
+                                        trip.travelStyle,
+                                    ].filter(Boolean)}
+                                    price={trip.estimatedPrice}
+                                />
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </section>
             <section className="created-trips bg-white py-20">
                 <div className="max-w-[1400px] mx-auto px-6 md:px-12">
 
