@@ -73,6 +73,17 @@ export const loginWithGoogle = async () => {
         console.error("Error during OAuth2 session creation:", error);
     }
 };
+export const loginWithGithub = async () => {
+    try {
+        account.createOAuth2Session(
+            OAuthProvider.Github,
+            `${window.location.origin}/`,
+            `${window.location.origin}/404`
+        );
+    } catch (error) {
+        console.error("Error during GitHub OAuth session creation:", error);
+    }
+};
 
 export const logoutUser = async () => {
     try {

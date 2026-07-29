@@ -77,7 +77,7 @@ const UserSidebar = () => {
             {showBecomeAdmin && (
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999]" onClick={() => setShowBecomeAdmin(false)}>
                     <div
-                        className="bg-white rounded-2xl p-8 w-[420px]"
+                        className="bg-white rounded-2xl p-8 w-[420px] m-3"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <h2 className="text-2xl font-bold">
