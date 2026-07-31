@@ -174,7 +174,7 @@ const TravelPage = ({ loaderData }: any) => {
                             </h3>
 
                             <p className="text-gray-500 mt-3">
-                                Generate your first AI itinerary.
+                                Generate your first AI trip.
                             </p>
                         </div>
                     ) : (
@@ -200,9 +200,12 @@ const TravelPage = ({ loaderData }: any) => {
             <section className="created-trips bg-white py-20">
                 <div className="max-w-[1400px] mx-auto px-6 md:px-12">
 
-                <h2 className="text-4xl font-bold mb-8">
+                <h2 className="text-4xl font-bold mb-2">
                     Created Trips
                 </h2>
+                    <p className="text-gray-500 mb-8">
+                        Some trips were built from the Traveller community (other real users).
+                    </p>
 
                 {trips.length === 0 ? (
                     <div className="text-center py-20">
