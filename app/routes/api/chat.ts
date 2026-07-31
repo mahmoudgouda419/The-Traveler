@@ -20,7 +20,7 @@ interface IncomingMessage {
     content: string;
 }
 export const action = async ({request}: ActionFunctionArgs) => {
-    if (request.method === "POST") {
+    if (request.method !== "POST") {
         return data({
             success: false, message: "not allowed"
         }, {status: 405})

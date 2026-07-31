@@ -16,9 +16,19 @@ export const action = async ({request} : ActionFunctionArgs) => {
         groupType,
         userId,
     } = await request.json();
+    async function getImages(query: string) {
+        const response = await fetch(
+            `https://api.unsplash.com/search/photos?query=${encodeURIComponent(query)}&per_page=3&client_id=${unsplashApiKey}`
+        );
 
+        const data = await response.json();
+
+        return data.results
+            .map((img: any) => img.urls?.regular)
+            .filter(Boolean);
+    }
     const groq = new Groq({
-        apiKey: process.!,
+        apiKey: process.env.GROQ_API_KEY!,
     });
     const unsplashApiKey = process.env.UNSPLASH_ACCESS_KEY!;
 
@@ -135,12 +145,23 @@ export const action = async ({request} : ActionFunctionArgs) => {
         console.log(trip);
 
         // const trip = parseMarkdownToJson(textResult.response.text())
-        const imageResponse = await fetch(
-            `https://api.unsplash.com/search/photos?query=${country} ${interests} ${travelStyle}&client_id=${unsplashApiKey}`
-        );
-        const imageUrls = (await imageResponse.json()).results.slice(0, 3).map((result: any) => result.urls?.regular || null);
-        const tripDetail = JSON.stringify(trip);
+        let imageUrls = await getImages(`${country} ${interests} ${travelStyle}`);
 
+        if (imageUrls.length < 3) {
+            imageUrls = [
+                ...imageUrls,
+                ...(await getImages(`${country} ${interests}`)),
+            ];
+        }
+
+        if (imageUrls.length < 3) {
+            imageUrls = [
+                ...imageUrls,
+                ...(await getImages(country)),
+            ];
+        }
+        imageUrls = [...new Set(imageUrls)].slice(0, 3);
+        const tripDetail = JSON.stringify(trip);
         console.log("tripDetail length:", tripDetail.length);
         console.log("tripDetail preview:", tripDetail.slice(0, 500));
 
