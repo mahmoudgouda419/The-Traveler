@@ -2,7 +2,7 @@ import { data, type ActionFunctionArgs } from "react-router";
 import {Query} from "appwrite";
 import {appwriteConfig, database} from "~/appwrite/client";
 
-const ADMIN_CODE =  "Mahmoud";
+const ADMIN_CODE =  "travello";
 export const action = async ({ request }: ActionFunctionArgs) => {
     try {
         const {code, accountId} = await request.json();
