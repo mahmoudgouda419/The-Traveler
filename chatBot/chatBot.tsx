@@ -23,7 +23,7 @@ const ChatBot = () => {
     return (
         <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end">
             {isOpen && (
-                <div className="mb-4 w-[360px] max-w-[600px] max-h-[390px] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-black/5 md:max-w-[520px]">
+                <div className="mb-4 w-[360px] sm:w-[420px] md:w-[520px] lg:w-[600px] max-h-[390px] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-black/5">
                     <div className="bg-blue-600 text-white px-5 py-4 flex items-center justify-between">
                         <div>
                             <p className="font-semibold">Travello</p>

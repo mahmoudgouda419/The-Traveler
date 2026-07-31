@@ -80,7 +80,7 @@ const TravelPage = ({ loaderData }: any) => {
         if (!typedRef.current) return;
         const typed = new Typed(typedRef.current!, {
             strings: [
-                "Adventure With AI",
+                "Adventure",
                 "Business Week",
                 "Family Vacation",
                 "Luxury Trip",
@@ -120,18 +120,12 @@ const TravelPage = ({ loaderData }: any) => {
                 <div className="max-w-[1400px] mx-auto w-full px-12">
                     <div className="max-w-3xl">
                         <h1
-                            className="
-        text-5xl
-        md:text-6xl
-        lg:text-7xl
-        font-bold
-        leading-tight
-    "
+                            className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight"
                         >
                             Plan Your Next
                             <br />
 
-                            <span ref={typedRef}></span>
+                            <span ref={typedRef} className="text-[40px] sm:text-5xl md:text-6xl lg:text-7xl"></span>
                         </h1>
 
                         <p className="text-xl text-dark-100/90 mt-6">
