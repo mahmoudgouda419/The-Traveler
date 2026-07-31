@@ -55,12 +55,12 @@ const ChatBot = () => {
 
                     <form onSubmit={handleSubmit} className="border-t border-gray-200 p-3 flex gap-2 bg-white">
                         <input type="text" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Start chating with Travello :)" className="flex-1 px-4 py-2 rounded-xl border border-gray-200 text-sm focus:ring-2 focus:ring-blue-500"/>
-                        <button type="submit" disabled={isLoading || !input.trim()}>Send</button>
+                        <button type="submit" disabled={isLoading || !input.trim()}><img src="/assets/icons/send.png" className="w-12 h-12"/></button>
                     </form>
                 </div>
 
             )}
-            <button onClick={() => setIsOpen((prev) => !prev)} className="w-14 h-14 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-xl flex items-center justify-center cursor-pointer transition text-2xl" aria-label={isOpen?"Close chat":"open chat"}>
+            <button onClick={() => setIsOpen((prev) => !prev)} className="w-18 h-18 p-2.5 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-xl flex items-center justify-center cursor-pointer transition text-2xl" aria-label={isOpen?"Close chat":"open chat"}>
                 {isOpen ? <img src="/assets/icons/x.png"/> : <img src="/assets/icons/bot.png"/>}
             </button>
         </div>
