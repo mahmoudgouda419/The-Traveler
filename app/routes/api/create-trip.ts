@@ -18,7 +18,7 @@ export const action = async ({request} : ActionFunctionArgs) => {
     } = await request.json();
 
     const groq = new Groq({
-        apiKey: process.env.GROQ_API_KEY!,
+        apiKey: process.!,
     });
     const unsplashApiKey = process.env.UNSPLASH_ACCESS_KEY!;
 
