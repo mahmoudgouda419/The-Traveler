@@ -9,7 +9,8 @@ import {
 import * as Sentry from "@sentry/react-router";
 import type { Route } from "./+types/root";
 import "./app.css";
-import ChatBotRoot from "../chatBot/ChatBotRoot";
+import ChatBot from "../chatBot/chatBot";
+
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
@@ -25,7 +26,6 @@ export const links: Route.LinksFunction = () => [
 
 import {registerLicense} from "@syncfusion/ej2-base";
 
-
 registerLicense(import.meta.env.VITE_SYNCFUSION_LICENSE_KEY);
 console.log(import.meta.env);
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -39,7 +39,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
-        <ChatBotRoot />
+        <ChatBot />
         <ScrollRestoration />
         <Scripts />
       </body>
