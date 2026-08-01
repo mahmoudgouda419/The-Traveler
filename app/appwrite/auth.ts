@@ -85,6 +85,18 @@ export const loginWithGithub = async () => {
     }
 };
 
+export const loginWithSlack = async () => {
+    try {
+        account.createOAuth2Session(
+            OAuthProvider.Slack,
+            `${window.location.origin}/`,
+            `${window.location.origin}/404`
+        )
+    } catch (error) {
+        console.error("Error during Slack OAuth session creation:", error);
+    }
+}
+
 export const logoutUser = async () => {
     try {
         await account.deleteSession("current");

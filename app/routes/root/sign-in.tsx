@@ -1,6 +1,6 @@
 import {Link, redirect} from "react-router";
 import {ButtonComponent} from "@syncfusion/ej2-react-buttons";
-import { loginWithGoogle, loginWithGithub } from "../../appwrite/auth";
+import { loginWithGoogle, loginWithGithub, loginWithSlack } from "../../appwrite/auth";
 import {account} from "../../appwrite/client";
 import { getExistingUser, storeUserData } from "../../appwrite/auth";
 
@@ -64,7 +64,7 @@ const SignIn = () => {
                     <ButtonComponent
                         type="button"
                         iconCss="e-search-icon"
-                        className="button-class !h-11 !w-full mt-3 !bg-[#24292F]"
+                        className="button-class !h-11 !w-full mt-3"
                         onClick={loginWithGithub}
                     >
                         <img
@@ -73,6 +73,10 @@ const SignIn = () => {
                             alt="Github"
                         />
                         <span className="p-18-semibold text-white">Sign in with GitHub</span>
+                    </ButtonComponent>
+                    <ButtonComponent type="button" iconCss="e-search-icon" className="button-class !h-11 !w-full mt-3" onClick={loginWithSlack}>
+                        <img src="/assets/icons/slack.svg" className="size-5" alt="Slack"/>
+                        <span className="p-18-semibold text-white">Sign in with Slack</span>
                     </ButtonComponent>
                 </div>
             </section>
