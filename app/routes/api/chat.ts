@@ -52,7 +52,7 @@ export const action = async ({request}: ActionFunctionArgs) => {
             apiKey: process.env.GROQ_API_KEY!,
         });
         const completion = await groq.chat.completions.create({
-            model: "llama-3.3-70b-versatile",
+            model: "openai/gpt-oss-120b",
             messages: [{role: "system", content: SYSTEM_PROMPT}, ...history],
             temperature: 0.6,
             max_tokens: 600,
